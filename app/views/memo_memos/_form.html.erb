@@ -1,0 +1,32 @@
+<%= form_with(model: memo_memo, local: true) do |form| %>
+  <% if memo_memo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(memo_memo.errors.count, "error") %> prohibited this memo_memo from being saved:</h2>
+
+      <ul>
+      <% memo_memo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :language %>
+    <%= form.text_field :language %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

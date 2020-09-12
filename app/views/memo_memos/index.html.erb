@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Memo Memos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Language</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memo_memos.each do |memo_memo| %>
+      <tr>
+        <td><%= memo_memo.title %></td>
+        <td><%= memo_memo.language %></td>
+        <td><%= memo_memo.content %></td>
+        <td><%= link_to 'Show', memo_memo %></td>
+        <td><%= link_to 'Edit', edit_memo_memo_path(memo_memo) %></td>
+        <td><%= link_to 'Destroy', memo_memo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Memo Memo', new_memo_memo_path %>
