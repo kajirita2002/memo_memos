@@ -20,9 +20,8 @@
       <button v-on:click="postAdd">postSnippet</button>
       <div>
         <input v-model="title" placeholder="title" />
-        <!-- 説明 2.23 -->
         <input v-model="language" placeholder="language" />
-        <input v-model="contents" placeholder="contents" />
+        <input v-model="content" placeholder="content" />
       </div>
     </div>
     <script>
@@ -35,7 +34,7 @@
             list: [{ title: "title1" }, { title: "title2" }],
             title: "new title",
             language: "Ruby",
-            contents: "contents",
+            content: "content",
           };
         },
         mounted() {
@@ -72,7 +71,7 @@
               .post("/memo_memos.json", {
                 title: "new title",
                 language: "Ruby",
-                contents: "contents",
+                content: "content",
               })
               .then((response) => this.listAdd());
           },
