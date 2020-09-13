@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,10 +22,23 @@
   <body>
     <v-app id="app">
       <v-toolbar color="red lighten-3" dark>
-        <v-toolbar-title>Snippet App</v-toolbar-title>
+        <v-toolbar-title>Memo Memos</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn flat>New Snippet</v-btn>
+        <v-btn flat>新しいメモを作る</v-btn>
       </v-toolbar>
+      <v-container style="height: 1000px; max-width: 2400px">
+        <v-layout>
+          <v-flex xs5>
+            <div style="margin: 10px">
+              <h2>Memo Memos ショートカット</h2>
+              <ul>
+                <li>Memo Memos タイトル</li>
+              </ul>
+            </div>
+          </v-flex>
+          <v-flex xs7> 右 </v-flex>
+        </v-layout>
+      </v-container>
     </v-app>
     <script>
       new Vue({
