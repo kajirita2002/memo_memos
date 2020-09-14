@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@1.5/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.5/dist/vuetify.js"></script>
+
+    <title>Memo Memos</title>
+  </head>
+  <body>
+    <v-app id="app">
+      <!-- ナビバー  -->
+      <v-toolbar color="red lighten-4" dark>
+        <v-toolbar-title>Memo Memos</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn flat v-on:click="togglePostModal()">新しいメモを作る</v-btn>
+      </v-toolbar>
+
+      <v-container style="max-width: 1200px">
+        <v-layout>
+          <!-- 左画面 -->
+          <v-flex xs5>
+            <div style="margin: 10px">
+              <h2>Memo Memos ショートカット</h2>
+              <ul>
+                <li v-for="memo in memoList">
+                  <span id="name" v-on:click="goElem(memo.id)"
+                    >[{{ memo.language }}] {{ memo.title }}</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </v-flex>
+          <!-- 右画面  -->
+          <v-flex xs7>
+            <!-- メモカード -->
+            <v-card style="margin-top: 10px" v-for="memo in memoList">
+              <v-card-title primary-title>
+                <a v-bind:id="memo.id"></a>
+                <h3 class="headline">{{ memo.title }}</h3>
+              </v-card-title>
+              <div style="margin: 10px 20px">
+                <textarea style="width: 100%; height: 300px; background-color: #efefef; padding: 3px;">{{ memo.contents }}</textarea>
+              </div>
+              <!-- メモカードのボタン -->
+              <v-card-actions>
+                <v-btn flat color="red" v-on:click="togglePutModal(memo.id)"
+                  >編集</v-btn
+                >
+                <v-btn flat color="gray" v-on:click="toggleDeleteModal(memo.id)"
+                  >削除</v-btn
+                >
+                <v-spacer></v-spacer>
+                <v-btn flat color="red" v-on:click="goTop">トップへ</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+
+        <!-- 投稿カード -->
+        <v-dialog v-model="dialogPostFlag" width="800" persistent>
+          <v-card>
+            <v-card-title
+              class="headline red lighten-3 white--text"
+              primary-title
+            >
+              新しいメモを作る
+            </v-card-title>
+            <v-text-field
+              v-model="postTitle"
+              label="タイトル"
+              required
+              style="margin: 20px; margin-top: 30px"
+            ></v-text-field>
+            <v-text-field
+              v-model="postLanguage"
+              label="言語"
+              required
+              style="margin: 20px; margin-bottom: 20px; margin-left: 20x"
+            ></v-text-field>
+            <v-card-text>
+              <p>メモ</p>
+              <div style="width: 100%">
+                <textarea
+                  style="
+                    width: 100%;
+                    height: 300px;
+                    background-color: #efefef;
+                    padding: 3px;
+                  "
+                  v-model="postContents"
+                ></textarea>
+              </div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="grey lighten-3" flat v-on:click="togglePostModal">
+                キャンセル
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="red" flat v-on:click="postMemo"> 追加する </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <!-- 編集カード -->
+        <v-dialog v-model="dialogPutFlag" width="800" persistent>
+          <v-card>
+            <v-card-title
+              class="headline red lighten-3 white--text"
+              primary-title
+            >
+              編集する
+            </v-card-title>
+            <v-text-field
+              v-model="putTitle"
+              label="タイトル"
+              required
+              style="margin: 20px; margin-top: 30px"
+            ></v-text-field>
+            <v-flex d-flex>
+              <v-text-field
+                v-model="putLanguage"
+                label="言語"
+                required
+                style="margin: 20px; margin-bottom: 0px; margin-left: 20px"
+              ></v-text-field>
+            </v-flex>
+            <v-card-text>
+              <p>メモ</p>
+              <div style="width: 100%">
+                <textarea
+                  style="
+                    width: 100%;
+                    height: 300px;
+                    background-color: #efefef;
+                    padding: 3px;
+                  "
+                  v-model="putContents"
+                ></textarea>
+              </div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="#grey lighten-4" flat v-on:click="togglePutModal">
+                キャンセル
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="red" flat v-on:click="putMemo">
+                メモを更新する
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogDeleteFlag" width="400px">
+          <v-card>
+            <v-card-title
+              class="headline red lighten-3 white--text"
+              primary-title
+            >
+              確定
+            </v-card-title>
+            <v-spacer></v-spacer>
+            <v-card-text>
+              <p>本当に削除してもよろしいですか？</p>
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-btn color="red" flat v-on:click="deleteMemo()"> 削除 </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-container>
+    </v-app>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            memoList: ["", ""],
+            allData: ["", ""],
+            dialogPostFlag: false,
+            postTitle: "",
+            postLanguage: "",
+            postContents: "",
+            dialogPutFlag: false,
+            putTitle: "",
+            putLanguage: "",
+            putContents: "",
+            dialogDeleteFlag: false,
+          };
+        },
+        mounted() {
+          this.listMemo();
+        },
+        methods: {
+          listMemo: function () {
+            axios.get("/memo_memos.json").then((response) => {
+              this.allData = response.data;
+              this.memoList = this.allData;
+            });
+          },
+
+          togglePostModal: function () {
+            this.dialogPostFlag = !this.dialogPostFlag;
+          },
+
+          postMemo: function () {
+            axios
+              .post("/memo_memos.json", {
+                title: this.postTitle,
+                language: this.postLanguage,
+                contents: this.postContents,
+              })
+              .then((response) => {
+                this.listMemo();
+                this.postTitle = "";
+                this.postLanguage = "";
+                this.postContents = "";
+              });
+            this.dialogPostFlag = !this.dialogPostFlag;
+          },
+
+          togglePutModal: function (id) {
+            axios.get("/memo_memos/" + id + ".json").then((response) => {
+              this.putTitle = response.data.title;
+              this.putLanguage = response.data.language;
+              this.putContents = response.data.contents;
+            });
+            this.id = id;
+            this.dialogPutFlag = !this.dialogPutFlag;
+          },
+
+          putMemo: function () {
+            axios
+              .put("/memo_memos/" + this.id + ".json", {
+                title: this.putTitle,
+                language: this.putLanguage,
+                contents: this.putContents,
+              })
+              .then((response) => {
+                this.listMemo();
+              });
+            this.dialogPutFlag = !this.dialogPutFlag;
+          },
+          deleteMemo: function () {
+            axios
+              .delete("/memo_memos/" + this.id + ".json")
+              .then((response) => {
+                this.listMemo();
+              });
+            this.dialogDeleteFlag = !this.dialogDeleteFlag;
+          },
+          toggleDeleteModal: function (id) {
+            this.id = id;
+            this.dialogDeleteFlag = !this.dialogDeleteFlag;
+          },
+          goElem: function (id) {
+            document.getElementById(id).scrollIntoView(true);
+          },
+          goTop: function () {
+            document.getElementById("app").scrollIntoView(true);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
