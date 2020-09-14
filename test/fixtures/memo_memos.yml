@@ -3,9 +3,9 @@
 one:
   title: MyString
   language: MyString
-  content: MyString
+  contents: MyString
 
 two:
   title: MyString
   language: MyString
-  content: MyString
+  contents: MyString

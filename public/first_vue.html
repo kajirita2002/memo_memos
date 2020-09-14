@@ -21,7 +21,7 @@
       <div>
         <input v-model="title" placeholder="title" />
         <input v-model="language" placeholder="language" />
-        <input v-model="content" placeholder="content" />
+        <input v-model="contents" placeholder="contents" />
       </div>
     </div>
     <script>
@@ -34,7 +34,7 @@
             list: [{ title: "title1" }, { title: "title2" }],
             title: "new title",
             language: "Ruby",
-            content: "content",
+            contents: "contents",
           };
         },
         mounted() {
@@ -71,7 +71,7 @@
               .post("/memo_memos.json", {
                 title: "new title",
                 language: "Ruby",
-                content: "content",
+                contents: "contents",
               })
               .then((response) => this.listAdd());
           },
