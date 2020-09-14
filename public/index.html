@@ -35,7 +35,11 @@
             <div style="margin: 10px">
               <h2>Memo Memos ショートカット</h2>
               <ul>
-                <li>Memo Memos タイトル</li>
+                <li v-for="memo in memoList">
+                  <span id="name" v-on:click="goElem(memo.id)"
+                    >[{{ memo.language }}] {{ memo.title }}</span
+                  >
+                </li>
               </ul>
             </div>
           </v-flex>
@@ -44,6 +48,7 @@
             <!-- メモカード -->
             <v-card style="margin-top: 10px" v-for="memo in memoList">
               <v-card-title primary-title>
+                <a v-bind:id="memo.id"></a>
                 <h3 class="headline">{{ memo.title }}</h3>
               </v-card-title>
               <div style="margin: 10px 20px">
@@ -67,6 +72,8 @@
                 <v-btn flat color="gray" v-on:click="toggleDeleteModal(memo.id)"
                   >削除</v-btn
                 >
+                <v-spacer></v-spacer>
+                <v-btn flat color="red" v-on:click="goTop">トップへ</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -267,11 +274,17 @@
               .then((response) => {
                 this.listMemo();
               });
-            this.dialogDeleteFlag = !dialogDeleteFlag;
+            this.dialogDeleteFlag = !this.dialogDeleteFlag;
           },
           toggleDeleteModal: function (id) {
             this.id = id;
             this.dialogDeleteFlag = !this.dialogDeleteFlag;
+          },
+          goElem: function (id) {
+            document.getElementById(id).scrollIntoView(true);
+          },
+          goTop: function () {
+            document.getElementById("app").scrollIntoView(true);
           },
         },
       });
