@@ -54,7 +54,9 @@
                 </textarea>
               </div>
               <v-card-actions>
-                <v-btn flat color="red">Update</v-btn>
+                <v-btn flat color="red" v-on:click="togglePutModal()"
+                  >Update</v-btn
+                >
                 <v-btn flat color="gray">Delete</v-btn>
               </v-card-actions>
             </v-card>
@@ -104,6 +106,55 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogPutFlag" width="800" persistent>
+          <v-card>
+            <v-card-title
+              class="headline red lighten-3 white--text"
+              primary-title
+            >
+              編集する
+            </v-card-title>
+            <v-text-field
+              v-model="putTitle"
+              label="Title"
+              required
+              style="margin: 20px; margin-top: 30px"
+            ></v-text-field>
+            <v-flex d-flex>
+              <v-text-field
+                v-model="putLanguage"
+                label="Language"
+                required
+                style="margin: 20px; margin-bottom: 0px; margin-left: 20px"
+              ></v-text-field>
+            </v-flex>
+            <v-card-text>
+              <p>Memo Memos</p>
+              <div style="width: 100%">
+                <textarea
+                  style="
+                    width: 100%;
+                    height: 300px;
+                    background-color: #efefef;
+                    padding: 3px;
+                  "
+                  v-model="putContents"
+                ></textarea>
+              </div>
+            </v-card-text>
+
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-btn color="#grey lighten-4" flat v-on:click="togglePutModal">
+                キャンセル
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="red" flat v-on:click="putMemo">
+                メモを更新する
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-app>
     <script>
@@ -117,6 +168,10 @@
             postTitle: "",
             postLanguage: "",
             postContents: "",
+            dialogPutFlag: false,
+            putTitle: "",
+            putLanguage: "",
+            putContents: "",
           };
         },
         mounted() {
@@ -146,6 +201,10 @@
                 this.postLanguage = "";
                 this.postContents = "";
               });
+            this.dialogPostFlag = !this.dialogPostFlag;
+          },
+          togglePutModal: function () {
+            this.dialogPutFlag = !this.dialogPutFlag;
           },
         },
       });
