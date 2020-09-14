@@ -64,7 +64,9 @@
                 <v-btn flat color="red" v-on:click="togglePutModal(memo.id)"
                   >編集</v-btn
                 >
-                <v-btn flat color="gray">削除</v-btn>
+                <v-btn flat color="gray" v-on:click="toggleDeleteModal()"
+                  >削除</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -165,6 +167,26 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogDeleteFlag" width="400px">
+          <v-card>
+            <v-card-title
+              class="headline red lighten-3 white--text"
+              primary-title
+            >
+              確定
+            </v-card-title>
+            <v-spacer></v-spacer>
+            <v-card-text>
+              <p>本当に削除してもよろしいですか？</p>
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-btn color="red" flat v-on:click="deleteMemo()"> 削除 </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-app>
 
@@ -183,6 +205,7 @@
             putTitle: "",
             putLanguage: "",
             putContents: "",
+            dialogDeleteFlag: false,
           };
         },
         mounted() {
@@ -237,6 +260,18 @@
                 this.listMemo();
               });
             this.dialogPutFlag = !this.dialogPutFlag;
+          },
+          deleteMemo: function () {
+            axios
+              .delete("/memo_memos/" + this.id + ".json")
+              .then((response) => {
+                this.listMemo();
+              });
+            this.dialogDeleteFlag = !dialogDeleteFlag;
+          },
+          toggleDeleteModal: function (id) {
+            this.id = id;
+            this.dialogDeleteFlag = !this.dialogDeleteFlag;
           },
         },
       });
