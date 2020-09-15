@@ -33,3 +33,66 @@
 * Vue.js 4.5.6
 
 <br> 
+
+## 📦 Feature
+
+<h3>- Auth -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a.gif)](https://gyazo.com/c06c66cdf7e28dcfbae8cdb10e111b4a)
+
+---
+
+<br>
+
+<h3>- Tweet -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/f12ef56a8f272d0db56ad9f87fff2893.gif)](https://gyazo.com/f12ef56a8f272d0db56ad9f87fff2893)
+
+---
+
+<br>
+
+<h3>- Search -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/9b7105ee547985bd04e3eb129135dd90.gif)](https://gyazo.com/9b7105ee547985bd04e3eb129135dd90)
+
+---
+
+<br>
+
+<h3>- Follow & Unfollow -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/ac4c5cac8e3544acdc65083ed83b9ea1.gif)](https://gyazo.com/ac4c5cac8e3544acdc65083ed83b9ea1)
+
+---
+
+<br>
+
+<h3>- Favorite -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/1f27c81d584ac5dcdfeafd2fa33e47da.gif)](https://gyazo.com/1f27c81d584ac5dcdfeafd2fa33e47da)
+
+---
+
+<br>
+
+<h3>- Filter -</h3>
+
+<br>
+
+[![Image from Gyazo](https://i.gyazo.com/e927c0cd4cfe86bb971d801d8ac325bd.gif)](https://gyazo.com/e927c0cd4cfe86bb971d801d8ac325bd)
+
+
+
+<br>
+
