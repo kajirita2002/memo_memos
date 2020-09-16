@@ -22,7 +22,7 @@
   <body>
     <v-app id="app">
       <!-- ナビバー  -->
-      <v-toolbar color="red lighten-4" dark>
+      <v-toolbar color="red lighten-2" dark>
         <v-toolbar-title>Memo Memos</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn flat v-on:click="togglePostModal()">新しいメモを作る</v-btn>
@@ -33,7 +33,13 @@
           <!-- 左画面 -->
           <v-flex xs5>
             <div style="margin: 10px">
-              <h2>Memo Memos ショートカット</h2>
+              <h2>言語を選択する</h2>
+              <v-select
+                v-model="language"
+                :items="languages"
+                label="言語"
+                v-on:change="abstruct"
+              ></v-select>
               <ul>
                 <li v-for="memo in memoList">
                   <span id="name" v-on:click="goElem(memo.id)"
@@ -44,15 +50,31 @@
             </div>
           </v-flex>
           <!-- 右画面  -->
-          <v-flex xs7>
+          <v-flex xs7 style="margin: 10px">
             <!-- メモカード -->
+            <h2>メモを探す</h2>
+            <v-text-field
+              v-model="searchWord"
+              v-on:keyup="abstruct"
+              label="Input Keyword"
+              style="margin-top: 4px"
+            ></v-text-field>
             <v-card style="margin-top: 10px" v-for="memo in memoList">
               <v-card-title primary-title>
                 <a v-bind:id="memo.id"></a>
                 <h3 class="headline">{{ memo.title }}</h3>
               </v-card-title>
               <div style="margin: 10px 20px">
-                <textarea style="width: 100%; height: 300px; background-color: #efefef; padding: 3px;">{{ memo.contents }}</textarea>
+                <textarea
+                  style="
+                    width: 100%;
+                    height: 300px;
+                    background-color: #efefef;
+                    padding: 3px;
+                  "
+                >
+{{ memo.contents }}</textarea
+                >
               </div>
               <!-- メモカードのボタン -->
               <v-card-actions>
@@ -90,6 +112,12 @@
               required
               style="margin: 20px; margin-bottom: 20px; margin-left: 20x"
             ></v-text-field>
+            <v-select
+              v-model="postLanguage"
+              :items="languagesForEdit"
+              label="過去の言語から選ぶ"
+              style="margin: 20px; margin-bottom: 0px; margin-left: 20px"
+            ></v-select>
             <v-card-text>
               <p>メモ</p>
               <div style="width: 100%">
@@ -106,7 +134,7 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-btn color="grey lighten-3" flat v-on:click="togglePostModal">
+              <v-btn color="#grey lighten-4" flat v-on:click="togglePostModal">
                 キャンセル
               </v-btn>
               <v-spacer></v-spacer>
@@ -130,6 +158,12 @@
               required
               style="margin: 20px; margin-top: 30px"
             ></v-text-field>
+            <v-select
+              v-model="putLanguage"
+              :items="languagesForEdit"
+              label="過去の言語から選ぶ"
+              style="margin: 20px; margin-bottom: 0px; margin-left: 20px"
+            ></v-select>
             <v-flex d-flex>
               <v-text-field
                 v-model="putLanguage"
@@ -194,7 +228,11 @@
           return {
             memoList: ["", ""],
             allData: ["", ""],
+            languages: ["All"],
+            languagesForEdit: [],
+            language: "ALL",
             dialogPostFlag: false,
+            searchWord: "",
             postTitle: "",
             postLanguage: "",
             postContents: "",
@@ -213,7 +251,21 @@
             axios.get("/memo_memos.json").then((response) => {
               this.allData = response.data;
               this.memoList = this.allData;
+              this.listLanguages();
+              this.abstruct();
             });
+          },
+
+          listLanguages: function () {
+            this.languages = [];
+            this.languagesForEdit = [];
+            this.languages.push("All");
+            for (i = 0; i < this.allData.length; i++) {
+              if (this.languages.indexOf(this.allData[i].language) == -1) {
+                this.languages.push(this.allData[i].language);
+                this.languagesForEdit.push(this.allData[i].language);
+              }
+            }
           },
 
           togglePostModal: function () {
@@ -275,6 +327,33 @@
           },
           goTop: function () {
             document.getElementById("app").scrollIntoView(true);
+          },
+          abstruct: function () {
+            if (this.language == "ALL") {
+              this.snippetList = [];
+              for (i = 0; i < this.allData.length; i++) {
+                if (
+                  this.allData[i].contents.indexOf(this.searchWord) !== -1 ||
+                  this.allData[i].title.indexOf(this.searchWord) !== -1 ||
+                  this.allData[i].language.indexOf(this.searchWord) !== -1
+                ) {
+                  this.memoList.push(this.allData[i]);
+                }
+              }
+            } else if (this.language != "") {
+              this.memoList = [];
+              for (i = 0; i < this.allData.length; i++) {
+                if (this.allData[i].language == this.language) {
+                  if (
+                    this.allData[i].contents.indexOf(this.searchWord) !== -1 ||
+                    this.allData[i].title.indexOf(this.searchWord) !== -1 ||
+                    this.allData[i].language.indexOf(this.searchWord) !== -1
+                  ) {
+                    this.memoList.push(this.allData[i]);
+                  }
+                }
+              }
+            }
           },
         },
       });
