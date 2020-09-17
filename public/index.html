@@ -203,8 +203,7 @@
             <v-card-title
               class="headline red lighten-3 white--text"
               primary-title
-            >
-              確定
+              >確定
             </v-card-title>
             <v-spacer></v-spacer>
             <v-card-text>
@@ -330,7 +329,7 @@
           },
           abstruct: function () {
             if (this.language == "ALL") {
-              this.snippetList = [];
+              this.memoList = [];
               for (i = 0; i < this.allData.length; i++) {
                 if (
                   this.allData[i].contents.indexOf(this.searchWord) !== -1 ||

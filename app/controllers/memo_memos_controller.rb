@@ -1,5 +1,5 @@
 class MemoMemosController < ApplicationController
-  before_action :set_memo_memo, only: %i[show edit update destroy]
+  before_action :set_memo_memo, only: [:show, :edit, :update, :destroy]
 
   # GET /memo_memos
   # GET /memo_memos.json
@@ -9,7 +9,8 @@ class MemoMemosController < ApplicationController
 
   # GET /memo_memos/1
   # GET /memo_memos/1.json
-  def show; end
+  def show
+  end
 
   # GET /memo_memos/new
   def new
@@ -17,7 +18,8 @@ class MemoMemosController < ApplicationController
   end
 
   # GET /memo_memos/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /memo_memos
   # POST /memo_memos.json
@@ -60,14 +62,13 @@ class MemoMemosController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_memo_memo
+      @memo_memo = MemoMemo.find(params[:id])
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_memo_memo
-    @memo_memo = MemoMemo.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def memo_memo_params
-    params.require(:memo_memo).permit(:title, :language, :contents)
-  end
+    # Only allow a list of trusted parameters through.
+    def memo_memo_params
+      params.require(:memo_memo).permit(:title, :language, :contents)
+    end
 end
