@@ -56,13 +56,17 @@
             <v-text-field
               v-model="searchWord"
               v-on:keyup="abstruct"
-              label="Input Keyword"
+              label="キーワードを入力してください。"
               style="margin-top: 4px"
             ></v-text-field>
             <v-card style="margin-top: 10px" v-for="memo in memoList">
+              <a v-bind:id="memo.id"></a>
               <v-card-title primary-title>
-                <a v-bind:id="memo.id"></a>
-                <h3 class="headline">{{ memo.title }}</h3>
+                <div style="background-color: #ffcdd2">
+                  <h3 class="headline">
+                    [{{ memo.language }}] {{ memo.title }}
+                  </h3>
+                </div>
               </v-card-title>
               <div style="margin: 10px 20px">
                 <textarea
@@ -258,7 +262,7 @@
           listLanguages: function () {
             this.languages = [];
             this.languagesForEdit = [];
-            this.languages.push("All");
+            this.languages.push("ALL");
             for (i = 0; i < this.allData.length; i++) {
               if (this.languages.indexOf(this.allData[i].language) == -1) {
                 this.languages.push(this.allData[i].language);
@@ -336,7 +340,7 @@
                   this.allData[i].title.indexOf(this.searchWord) !== -1 ||
                   this.allData[i].language.indexOf(this.searchWord) !== -1
                 ) {
-                  this.memlList.push(this.allData[i]);
+                  this.memoList.push(this.allData[i]);
                 }
               }
             } else if (this.language != "") {
