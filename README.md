@@ -24,7 +24,7 @@
 
 <h4>デプロイ版(Heroku) →　<a href="https://memograming.herokuapp.com/">こちら</a><h4>
   
-<br>
+
 
 <h4>
 
@@ -52,7 +52,7 @@
 
 <br>
 
-[![Image from Gyazo](https://i.gyazo.com/2c1e499e900c2c35efdddee65e1ff981.gif)](https://gyazo.com/2c1e499e900c2c35efdddee65e1ff981)
+[![Image from Gyazo](https://i.gyazo.com/cb5bdf2a5b8f092df0c1313edca42a6f.gif)](https://gyazo.com/cb5bdf2a5b8f092df0c1313edca42a6f)
 
 ---
 
@@ -64,7 +64,7 @@
 
 <br>
 
-[![Image from Gyazo](https://i.gyazo.com/0a6252d455c2b5e34bdb7386d9d9b71b.gif)](https://gyazo.com/0a6252d455c2b5e34bdb7386d9d9b71b)
+[![Image from Gyazo](https://i.gyazo.com/396948d0cc212dc0b38e59210663060c.gif)](https://gyazo.com/396948d0cc212dc0b38e59210663060c)
 
 ---
 
@@ -74,8 +74,7 @@
 
 <br>
 
-
-[![Image from Gyazo](https://i.gyazo.com/d5972920e620007ee1290a1d01960489.gif)](https://gyazo.com/d5972920e620007ee1290a1d01960489)
+[![Image from Gyazo](https://i.gyazo.com/4ab431165d5539e07158ae1bb9ed1449.gif)](https://gyazo.com/4ab431165d5539e07158ae1bb9ed1449)
 
 
 <br>
