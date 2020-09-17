@@ -1,4 +1,4 @@
-<img src="https://www.shutterstock.com/editor/design/14565028?share_code=abada2d4b007582fb25fd6b7a09a5e39">
+[![Image from Gyazo](https://i.gyazo.com/7551a2631ad22d0043d643b194e277c4.jpg)](https://gyazo.com/7551a2631ad22d0043d643b194e277c4)
 
 <h2 align="center">MEMOGRAMING</h2>
 <p align="center">
