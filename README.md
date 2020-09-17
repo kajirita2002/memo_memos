@@ -12,8 +12,8 @@
 
 ## 👄 Overview
 
-<h4>美味しいごはんを投稿することができます。</h4>
-<h4>いい投稿には『いいね』したり、コメントを送ったりできるアプリです。</h4>
+<h4>プログラミング中のメモを取れるアプリです。</h4>
+<h4>言語やキーワードで検索することができます。</h4>
 <h4>サーバーはRuby on Rails、フロントはVue.jsで、 </h4>
 <h4>UIはVuetifyを利用して作り,Herokuでデプロイしました。</h4>
 
@@ -22,16 +22,16 @@
 
 ## 📱 Usage
 
-<h4>デプロイ版(Heroku) →　<a href="https://meshidori.herokuapp.com/users/sign_in">こちら</a><h4>
+<h4>デプロイ版(Heroku) →　<a href="https://memograming.herokuapp.com/">こちら</a><h4>
   
 <br>
 
 <h4>
 
-`$ git clone https://github.com/kajirita2002/memo_memos.git`
+`$ git clone https://github.com/kajirita2002/memograming.git`
 
 
-`$ cd memo_memos`
+`$ cd memograming`
 
 
 `$ rails s`
@@ -60,7 +60,7 @@
 
 
 
-<h3>- Search -</h3>
+<h3>- 言語で検索 -</h3>
 
 <br>
 
@@ -70,7 +70,7 @@
 
 <br>
 
-<h3>- Comment -</h3>
+<h3>- キーワード検索 -</h3>
 
 <br>
 
@@ -108,7 +108,7 @@
 
 ## 👨 Author
 
-- [Github](https://github.com/aocattleya)
+- [Github](https://github.com/kajirita2002)
 
 - [FB](https://www.facebook.com/rita.kajimura.1/)
 
