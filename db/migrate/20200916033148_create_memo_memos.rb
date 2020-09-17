@@ -3,7 +3,7 @@ class CreateMemoMemos < ActiveRecord::Migration[5.2]
     create_table :memo_memos do |t|
       t.string :title
       t.string :language
-      t.string :content
+      t.string :contents
 
       t.timestamps
     end
